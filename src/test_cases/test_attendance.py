@@ -33,8 +33,10 @@ class TestAttendance(object):
                 page.passListenQuestion()  # type=4,只听
             elif type == 5:
                 page.passChooseQuestion()  # type=5,单选题
+            elif type == 100:
+                page.passResult()   # type=0,课程结束页
             else:
-                page.passResult()   # type=0,单选题
+                print("---------->>页面类型无法识别，重新进行判断：")
                 break
 
 

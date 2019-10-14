@@ -14,7 +14,7 @@ import time
 
 class CourseDetailPage(object):
 
-    def getTQuestionype(self):  #识别是什么题目type: 1跟读题、2填词、3对话、4、只听题、5、单选题
+    def getTQuestionype(self):  #识别是什么题目type: 1跟读题、2填词、3对话、4只听题、5单选题、100课程结束页、0无法判断的类型
         time.sleep(2)
         if(FindElement().ifExistById('com.qingclass.pandora:id/ll_voice')):  # 有对话框就是对话题
             type = 3
@@ -25,9 +25,11 @@ class CourseDetailPage(object):
         elif (FindElement().ifExistByXpath('//*[@resource-id="com.qingclass.pandora:id/tv_left" and @text="听原音"]')):  # 有左按钮（听原音）是跟读题
             type = 1  # 跟读题
         elif (FindElement().ifExistByXpath('//*[@resource-id="com.qingclass.pandora:id/tv_right" and @text="完成学习"]')):
-            type = 0  # 课程结束页
-        else:
+            type = 100  # 课程结束页
+        elif(FindElement().ifExistById('com.qingclass.pandora:id/orv')):
             type = 5  # 单项选择题
+        else:
+            type = 0
         return type
 
     def passReadQuestion(self):  # 完成跟读题,type=1
@@ -80,9 +82,13 @@ class CourseDetailPage(object):
     def passChooseQuestion(self): # 完成单选题,type=5
         print("---------->>页面类型5 单选题：")
         for i in range(2):
-            AndroidClient.driver.find_elements_by_id("com.qingclass.pandora:id/tv_question")[2].click()
+            eles = AndroidClient.driver.find_elements_by_xpath('//*[@resource-id="com.qingclass.pandora:id/orv"]/*/*[@resource-id="com.qingclass.pandora:id/tv_question"]')
+            eles[1].click()
             print("---------选中选项")
+            if FindElement().ifExistById('com.qingclass.pandora:id/tv_next'): #如果一次就对，不需要重复
+                break
         AndroidClient.driver.find_element_by_id("com.qingclass.pandora:id/tv_next").click()  # 点击下一步
+
 
 
 

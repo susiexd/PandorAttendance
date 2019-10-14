@@ -44,9 +44,23 @@ class FindElement(object):
             ele = None
         return ele
 
-    def findElementByXpath(self, ele_xpath):  # 传入元素resource_id，存在元素返回ele_object，不存在返回null
+    def findElementsById(self, ele_id):  # 传入元素resource_id，存在元素返回ele_objects，不存在返回null
+        try:
+            eles = AndroidClient.driver.find_element_by_id(ele_id)
+        except Exception as e:
+            eles = None
+        return eles
+
+    def findElementByXpath(self, ele_xpath):  # 传入元素xpath，存在元素返回ele_object，不存在返回null
         try:
             ele = AndroidClient.driver.find_element_by_xpath(ele_xpath)
         except Exception as e:
             ele = None
         return ele
+
+    def findElementsByXpath(self, ele_xpath):  # 传入元素xpath，存在元素返回ele_object，不存在返回null
+        try:
+            eles = AndroidClient.driver.find_elements_by_xpath(ele_xpath)
+        except Exception as e:
+            eles = None
+        return eles
