@@ -1,1 +1,2 @@
 PandorAttendance
+基于python3和appium实现潘多拉打卡的界面自动化
