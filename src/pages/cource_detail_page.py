@@ -76,7 +76,7 @@ class CourseDetailPage(object):
 
     def passResult(self):  # 最后完成页面，type=0
         print("---------->>页面类型0 结束页：")
-        AndroidClient.driver.find_elements_by_xpath('//*[@resource-id="com.qingclass.pandora:id/tv_right" and @text="完成学习"]').click()
+        AndroidClient.driver.find_element_by_xpath('//*[@resource-id="com.qingclass.pandora:id/tv_right" and @text="完成学习"]').click()
         print("------------撒花✿✿ヽ(°▽°)ノ✿ 打卡成功 -------------")
 
     def passChooseQuestion(self): # 完成单选题,type=5

@@ -35,9 +35,10 @@ class TestAttendance(object):
                 page.passChooseQuestion()  # type=5,单选题
             elif type == 100:
                 page.passResult()   # type=0,课程结束页
+                break
             else:
                 print("---------->>页面类型无法识别，重新进行判断：")
-                break
+
 
 
 
