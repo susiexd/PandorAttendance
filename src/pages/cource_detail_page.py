@@ -26,6 +26,8 @@ class CourseDetailPage(object):
             type = 1  # 跟读题
         elif (FindElement().ifExistByXpath('//*[@resource-id="com.qingclass.pandora:id/tv_right" and @text="完成学习"]')):
             type = 100  # 课程结束页
+        elif(FindElement().ifExistById('com.qingclass.pandora:id/bt_share')):
+            type = 100
         elif(FindElement().ifExistById('com.qingclass.pandora:id/orv')):
             type = 5  # 单项选择题
         else:
@@ -75,8 +77,11 @@ class CourseDetailPage(object):
         AndroidClient.driver.find_element_by_id("com.qingclass.pandora:id/right_button").click() # 直接点击下一步
 
     def passResult(self):  # 最后完成页面，type=0
-        print("---------->>页面类型0 结束页：")
-        AndroidClient.driver.find_element_by_xpath('//*[@resource-id="com.qingclass.pandora:id/tv_right" and @text="完成学习"]').click()
+        if FindElement().ifExistById('com.qingclass.pandora:id/bt_share'):
+            print("---------->>页面类型100 打卡页：")
+        else:
+            print("---------->>页面类型100 结束页：")
+            AndroidClient.driver.find_element_by_xpath('//*[@resource-id="com.qingclass.pandora:id/tv_right" and @text="完成学习"]').click()
         print("------------撒花✿✿ヽ(°▽°)ノ✿ 打卡成功 -------------")
 
     def passChooseQuestion(self): # 完成单选题,type=5

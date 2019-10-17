@@ -37,6 +37,15 @@ class FindElement(object):
             AndroidClient.driver.swipe(200, 400, 200, 20)
         return result
 
+    def ifExistByXpathSwipeUp(self, ele_xpath):  # 传入元素resource_id，存在元素返回true，不存在则上拉页面循环找几次
+        result = False
+        for i in range(1, 3):
+            result = FindElement().ifExistByXpath(ele_xpath)
+            if result:
+                break
+            AndroidClient.driver.swipe(200, 400, 200, 20)
+        return result
+
     def findElementById(self, ele_id):  # 传入元素resource_id，存在元素返回ele_object，不存在返回null
         try:
             ele = AndroidClient.driver.find_element_by_id(ele_id)
